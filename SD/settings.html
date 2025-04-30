@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Настройки - ComeBack Device Clear</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="img/favicon.ico">
+</head>
+<body>
+    <div class="app-container">
+        <header class="app-header">
+            <div class="header-logo">
+                <img src="img/logo.png" alt="ComeBack Device Clear">
+                <h1>ComeBack Device Clear</h1>
+            </div>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="dashboard.html">Панель управления</a></li>
+                    <li><a href="schedule.html">Расписание</a></li>
+                    <li class="active"><a href="settings.html">Настройки</a></li>
+                    <li><a href="logs.html">Журнал</a></li>
+                </ul>
+            </nav>
+            <div class="user-menu">
+                <span id="username-display"></span>
+                <button id="logout-btn" class="btn btn-sm">Выход</button>
+            </div>
+        </header>
+        
+        <main class="app-content">
+            <section class="content-header">
+                <h2>Настройки системы</h2>
+            </section>
+            
+            <div class="settings-tabs">
+                <div class="tabs-header">
+                    <button class="tab-btn active" data-tab="network">Сеть</button>
+                    <button class="tab-btn" data-tab="time">Время</button>
+                    <button class="tab-btn" data-tab="security">Безопасность</button>
+                    <button class="tab-btn" data-tab="sensors">Датчики</button>
+                    <button class="tab-btn" data-tab="system">Система</button>
+                </div>
+                
+                <div class="tabs-content">
+                    <!-- Настройки сети -->
+                    <div class="tab-pane active" id="network-tab">
+                        <h3>Настройки сети</h3>
+                        <form id="network-form" class="settings-form">
+                            <div class="form-section">
+                                <h4>Ethernet</h4>
+                                <div class="form-group">
+                                    <label for="dhcp-enabled">Использовать DHCP</label>
+                                    <div class="toggle-switch">
+                                        <input type="checkbox" id="dhcp-enabled" checked>
+                                        <label for="dhcp-enabled"></label>
+                                    </div>
+                                </div>
+                                
+                                <div id="static-ip-settings">
+                                    <div class="form-group">
+                                        <label for="ip-address">IP-адрес</label>
+                                        <input type="text" id="ip-address" class="form-control" placeholder="192.168.0.34">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="subnet-mask">Маска подсети</label>
+                                        <input type="text" id="subnet-mask" class="form-control" placeholder="255.255.255.0">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="gateway">Шлюз</label>
+                                        <input type="text" id="gateway" class="form-control" placeholder="192.168.0.1">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="dns-server">DNS-сервер</label>
+                                        <input type="text" id="dns-server" class="form-control" placeholder="8.8.8.8">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-section">
+                                <h4>Wi-Fi</h4>
+                                <div class="form-group">
+                                    <label for="wifi-enabled">Включить Wi-Fi</label>
+                                    <div class="toggle-switch">
+                                        <input type="checkbox" id="wifi-enabled">
+                                        <label for="wifi-enabled"></label>
+                                    </div>
+                                </div>
+                                
+                                <div id="wifi-settings">
+                                    <div class="form-group">
+                                        <label for="wifi-mode">Режим Wi-Fi</label>
+                                        <select id="wifi-mode" class="form-control">
+                                            <option value="client">Клиент</option>
+                                            <option value="ap" selected>Точка доступа</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <div id="wifi-client-settings">
+                                        <div class="form-group">
+                                            <label for="wifi-ssid">Имя сети (SSID)</label>
+                                            <div class="input-with-button">
+                                                <input type="text" id="wifi-ssid" class="form-control" placeholder="Введите имя сети">
+                                                <button id="scan-wifi-btn" type="button" class="btn btn-secondary">Сканировать</button>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="wifi-password">Пароль</label>
+                                            <input type="password" id="wifi-password" class="form-control" placeholder="Введите пароль">
+                                        </div>
+                                    </div>
+                                    
+                                    <div id="wifi-ap-settings">
+                                        <div class="form-group">
+                                            <label for="ap-ssid">Имя точки доступа</label>
+                                            <input type="text" id="ap-ssid" class="form-control" placeholder="ComeBackDevice">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="ap-password">Пароль точки доступа</label>
+                                            <input type="password" id="ap-password" class="form-control" placeholder="Минимум 8 символов">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-section">
+                                <h4>NTP</h4>
+                                <div class="form-group">
+                                                                        <label for="ntp-enabled">Синхронизация времени</label>
+                                    <div class="toggle-switch">
+                                        <input type="checkbox" id="ntp-enabled" checked>
+                                        <label for="ntp-enabled"></label>
+                                    </div>
+                                </div>
+                                
+                                <div id="ntp-settings">
+                                    <div class="form-group">
+                                        <label for="ntp-server">NTP-сервер</label>
+                                        <input type="text" id="ntp-server" class="form-control" placeholder="pool.ntp.org">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="timezone">Часовой пояс</label>
+                                        <select id="timezone" class="form-control">
+                                            <option value="-12">UTC-12:00</option>
+                                            <option value="-11">UTC-11:00</option>
+                                            <option value="-10">UTC-10:00</option>
+                                            <option value="-9">UTC-09:00</option>
+                                            <option value="-8">UTC-08:00</option>
+                                            <option value="-7">UTC-07:00</option>
+                                            <option value="-6">UTC-06:00</option>
+                                            <option value="-5">UTC-05:00</option>
+                                            <option value="-4">UTC-04:00</option>
+                                            <option value="-3">UTC-03:00</option>
+                                            <option value="-2">UTC-02:00</option>
+                                            <option value="-1">UTC-01:00</option>
+                                            <option value="0">UTC+00:00</option>
+                                            <option value="1">UTC+01:00</option>
+                                            <option value="2">UTC+02:00</option>
+                                            <option value="3" selected>UTC+03:00 (Москва)</option>
+                                            <option value="4">UTC+04:00</option>
+                                            <option value="5">UTC+05:00</option>
+                                            <option value="6">UTC+06:00</option>
+                                            <option value="7">UTC+07:00</option>
+                                            <option value="8">UTC+08:00</option>
+                                            <option value="9">UTC+09:00</option>
+                                            <option value="10">UTC+10:00</option>
+                                            <option value="11">UTC+11:00</option>
+                                            <option value="12">UTC+12:00</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-actions">
+                                <button type="button" id="network-save-btn" class="btn btn-primary">Сохранить настройки</button>
+                            </div>
+                        </form>
+                    </div>
+                    
+                    <!-- Настройки времени -->
+                    <div class="tab-pane" id="time-tab">
+                        <h3>Настройки времени</h3>
+                        <form id="time-form" class="settings-form">
+                            <div class="form-group">
+                                <label for="current-date">Текущая дата</label>
+                                <input type="date" id="current-date" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="current-time">Текущее время</label>
+                                <input type="time" id="current-time" class="form-control" step="1">
+                            </div>
+                            <div class="form-group">
+                                <label>Температура RTC</label>
+                                <div id="rtc-temperature" class="form-control-static">Загрузка...</div>
+                            </div>
+                            <div class="form-actions">
+                                <button type="button" id="time-sync-ntp-btn" class="btn btn-secondary">Синхронизировать с NTP</button>
+                                <button type="button" id="time-save-btn" class="btn btn-primary">Установить дату и время</button>
+                            </div>
+                        </form>
+                    </div>
+                    
+                    <!-- Настройки безопасности -->
+                    <div class="tab-pane" id="security-tab">
+                        <h3>Настройки безопасности</h3>
+                        <form id="security-form" class="settings-form">
+                            <div class="form-group">
+                                <label for="auth-enabled">Включить авторизацию</label>
+                                <div class="toggle-switch">
+                                    <input type="checkbox" id="auth-enabled" checked>
+                                    <label for="auth-enabled"></label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="auth-username">Имя пользователя</label>
+                                <input type="text" id="auth-username" class="form-control" placeholder="admin">
+                            </div>
+                            <div class="form-group">
+                                <label for="auth-password">Новый пароль</label>
+                                <input type="password" id="auth-password" class="form-control" placeholder="Оставьте пустым, чтобы не менять">
+                            </div>
+                            <div class="form-group">
+                                <label for="auth-password-confirm">Подтверждение пароля</label>
+                                <input type="password" id="auth-password-confirm" class="form-control" placeholder="Подтвердите новый пароль">
+                            </div>
+                            <div class="form-actions">
+                                <button type="button" id="security-save-btn" class="btn btn-primary">Сохранить настройки</button>
+                            </div>
+                        </form>
+                    </div>
+                    
+                    <!-- Настройки датчиков -->
+                    <div class="tab-pane" id="sensors-tab">
+                        <h3>Настройки датчиков</h3>
+                        <form id="sensors-form" class="settings-form">
+                            <div class="form-section">
+                                <h4>Датчик температуры</h4>
+                                <div class="form-group">
+                                    <label for="temp-correction-enabled">Коррекция температуры</label>
+                                    <div class="toggle-switch">
+                                        <input type="checkbox" id="temp-correction-enabled">
+                                        <label for="temp-correction-enabled"></label>
+                                    </div>
+                                </div>
+                                <div class="form-group" id="temp-correction-value-group">
+                                    <label for="temp-correction-value">Значение коррекции (°C)</label>
+                                    <input type="number" id="temp-correction-value" class="form-control" step="0.1" value="0.0">
+                                </div>
+                            </div>
+                            
+                            <div class="form-section">
+                                <h4>Датчики уровня воды</h4>
+                                <div class="form-group">
+                                    <label for="invert-empty-sensor">Инвертировать датчик пустого бака</label>
+                                    <div class="toggle-switch">
+                                        <input type="checkbox" id="invert-empty-sensor">
+                                        <label for="invert-empty-sensor"></label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="invert-full-sensor">Инвертировать датчик полного бака</label>
+                                    <div class="toggle-switch">
+                                        <input type="checkbox" id="invert-full-sensor">
+                                        <label for="invert-full-sensor"></label>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-actions">
+                                <button type="button" id="sensors-save-btn" class="btn btn-primary">Сохранить настройки</button>
+                            </div>
+                        </form>
+                    </div>
+                    
+                    <!-- Системные настройки -->
+                    <div class="tab-pane" id="system-tab">
+                        <h3>Системные настройки</h3>
+                        <div class="system-info-section">
+                            <h4>Информация о системе</h4>
+                            <div class="info-grid">
+                                <div class="info-item">
+                                    <span class="info-label">Версия прошивки:</span>
+                                    <span id="firmware-version-info" class="info-value">Загрузка...</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label">Время работы:</span>
+                                    <span id="uptime-info" class="info-value">Загрузка...</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label">Свободная память:</span>
+                                    <span id="free-memory-info" class="info-value">Загрузка...</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label">Частота процессора:</span>
+                                    <span id="cpu-freq-info" class="info-value">Загрузка...</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label">SD-карта:</span>
+                                    <span id="sd-card-info-system" class="info-value">Загрузка...</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-section">
+                            <h4>Обновление прошивки</h4>
+                            <form id="firmware-form" class="settings-form">
+                                <div class="form-group">
+                                    <label for="firmware-file">Файл прошивки</label>
+                                    <input type="file" id="firmware-file" class="form-control" accept=".bin">
+                                </div>
+                                <div class="progress-container" id="firmware-progress-container" style="display: none;">
+                                    <div class="progress">
+                                        <div id="firmware-progress" class="progress-bar" style="width: 0%"></div>
+                                    </div>
+                                    <div id="firmware-progress-text" class="progress-text">0%</div>
+                                </div>
+                                <div class="form-actions">
+                                    <button type="button" id="firmware-upload-btn" class="btn btn-primary">Загрузить прошивку</button>
+                                </div>
+                            </form>
+                        </div>
+                        
+                        <div class="form-section">
+                            <h4>Управление системой</h4>
+                            <div class="system-actions">
+                                <button type="button" id="system-reboot-btn" class="btn btn-warning">Перезагрузить устройство</button>
+                                <button type="button" id="system-reset-btn" class="btn btn-danger">Сбросить настройки</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        
+        <footer class="app-footer">
+            <p>&copy; 2025 ComeBack Device Clear. Все права защищены.</p>
+        </footer>
+    </div>
+    
+    <div id="wifi-networks-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Доступные Wi-Fi сети</h3>
+                <span class="modal-close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div id="wifi-networks-list" class="wifi-networks-list">
+                    <div class="loading-spinner">Сканирование сетей...</div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="wifi-scan-cancel-btn" class="btn btn-secondary">Отмена</button>
+                <button id="wifi-scan-refresh-btn" class="btn btn-primary">Обновить</button>
+            </div>
+        </div>
+    </div>
+    
+    <div id="confirm-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="confirm-modal-title">Подтверждение</h3>
+                <span class="modal-close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <p id="confirm-modal-message">Вы уверены, что хотите выполнить это действие?</p>
+            </div>
+            <div class="modal-footer">
+                <button id="confirm-cancel-btn" class="btn btn-secondary">Отмена</button>
+                <button id="confirm-ok-btn" class="btn btn-danger">Подтвердить</button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="js/auth.js"></script>
+    <script src="js/settings.js"></script>
+</body>
+</html>

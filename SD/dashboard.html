@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Панель управления - ComeBack Device Clear</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="img/favicon.ico">
+</head>
+<body>
+    <div class="app-container">
+        <header class="app-header">
+            <div class="header-logo">
+                <img src="img/logo.png" alt="ComeBack Device Clear">
+                <h1>ComeBack Device Clear</h1>
+            </div>
+            <nav class="main-nav">
+                <ul>
+                    <li class="active"><a href="dashboard.html">Панель управления</a></li>
+                    <li><a href="schedule.html">Расписание</a></li>
+                    <li><a href="settings.html">Настройки</a></li>
+                    <li><a href="logs.html">Журнал</a></li>
+                </ul>
+            </nav>
+            <div class="user-menu">
+                <span id="username-display"></span>
+                <button id="logout-btn" class="btn btn-sm">Выход</button>
+            </div>
+        </header>
+        
+        <main class="app-content">
+            <section class="dashboard-header">
+                <h2>Панель управления</h2>
+                <div class="dashboard-status">
+                    <div class="status-item">
+                        <span class="status-label">Статус:</span>
+                        <span id="device-status" class="status-value status-online">Онлайн</span>
+                    </div>
+                    <div class="status-item">
+                        <span class="status-label">Время:</span>
+                        <span id="current-time" class="status-value">Загрузка...</span>
+                    </div>
+                    <div class="status-item">
+                        <span class="status-label">Версия:</span>
+                        <span id="firmware-version" class="status-value">Загрузка...</span>
+                    </div>
+                </div>
+            </section>
+            
+            <div class="dashboard-grid">
+                <section class="dashboard-card water-status">
+                    <h3>Состояние воды</h3>
+                    <div class="water-level-container">
+                        <div class="water-level-indicator">
+                            <div id="water-level-fill" class="water-level-fill" style="height: 50%;"></div>
+                        </div>
+                        <div class="water-level-labels">
+                            <span class="water-level-full">Полный</span>
+                            <span class="water-level-normal">Нормальный</span>
+                            <span class="water-level-empty">Пустой</span>
+                        </div>
+                    </div>
+                    <div class="water-status-info">
+                        <div class="status-item">
+                            <span class="status-label">Уровень:</span>
+                            <span id="water-level-status" class="status-value">Загрузка...</span>
+                        </div>
+                        <div class="status-item">
+                            <span class="status-label">Температура:</span>
+                            <span id="temperature" class="status-value">Загрузка...</span>
+                        </div>
+                    </div>
+                </section>
+                
+                <section class="dashboard-card load-control">
+                    <h3>Управление нагрузками</h3>
+                    <div class="load-control-grid">
+                        <div class="load-control-item">
+                            <h4>Нагрузка 1 (Насос)</h4>
+                            <div class="load-status">
+                                <span class="status-label">Статус:</span>
+                                <span id="load1-status" class="status-value status-off">Выключен</span>
+                            </div>
+                            <div class="load-buttons">
+                                <button id="load1-on" class="btn btn-success">Включить</button>
+                                <button id="load1-off" class="btn btn-danger">Выключить</button>
+                            </div>
+                        </div>
+                        
+                        <div class="load-control-item">
+                            <h4>Нагрузка 2 (Дворник)</h4>
+                            <div class="load-status">
+                                <span class="status-label">Статус:</span>
+                                <span id="load2-status" class="status-value status-off">Выключен</span>
+                            </div>
+                            <div class="load-buttons">
+                                <button id="load2-on" class="btn btn-success">Включить</button>
+                                <button id="load2-off" class="btn btn-danger">Выключить</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <section class="dashboard-card schedule-info">
+                    <h3>Информация о расписании</h3>
+                    <div class="schedule-next">
+                        <h4>Следующее событие:</h4>
+                        <div id="next-schedule" class="next-schedule-info">
+                            Загрузка...
+                        </div>
+                    </div>
+                    <div class="schedule-buttons">
+                        <a href="schedule.html" class="btn btn-primary">Настроить расписание</a>
+                    </div>
+                </section>
+                
+                <section class="dashboard-card system-info">
+                    <h3>Системная информация</h3>
+                    <div class="system-info-grid">
+                        <div class="info-item">
+                            <span class="info-label">Время работы:</span>
+                            <span id="uptime" class="info-value">Загрузка...</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">IP-адрес:</span>
+                            <span id="ip-address" class="info-value">Загрузка...</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Свободная память:</span>
+                            <span id="free-memory" class="info-value">Загрузка...</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">SD-карта:</span>
+                            <span id="sd-card-info" class="info-value">Загрузка...</span>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+        
+        <footer class="app-footer">
+            <p>&copy; 2025 ComeBack Device Clear. Все права защищены.</p>
+        </footer>
+    </div>
+    
+    <script src="js/auth.js"></script>
+    <script src="js/dashboard.js"></script>
+</body>
+</html>

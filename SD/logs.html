@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Журнал - ComeBack Device Clear</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="img/favicon.ico">
+</head>
+<body>
+    <div class="app-container">
+        <header class="app-header">
+            <div class="header-logo">
+                <img src="img/logo.png" alt="ComeBack Device Clear">
+                <h1>ComeBack Device Clear</h1>
+            </div>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="dashboard.html">Панель управления</a></li>
+                    <li><a href="schedule.html">Расписание</a></li>
+                    <li><a href="settings.html">Настройки</a></li>
+                    <li class="active"><a href="logs.html">Журнал</a></li>
+                </ul>
+            </nav>
+            <div class="user-menu">
+                <span id="username-display"></span>
+                <button id="logout-btn" class="btn btn-sm">Выход</button>
+            </div>
+        </header>
+        
+        <main class="app-content">
+            <section class="content-header">
+                <h2>Журнал событий</h2>
+                <div class="content-actions">
+                    <button id="refresh-logs-btn" class="btn btn-primary">Обновить</button>
+                    <button id="clear-logs-btn" class="btn btn-danger">Очистить журнал</button>
+                </div>
+            </section>
+            
+            <section class="logs-filter">
+                <div class="filter-group">
+                    <label for="log-level-filter">Уровень:</label>
+                    <select id="log-level-filter" class="form-control">
+                        <option value="all">Все</option>
+                        <option value="info">Информация</option>
+                        <option value="warning">Предупреждения</option>
+                        <option value="error">Ошибки</option>
+                        <option value="debug">Отладка</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="log-search">Поиск:</label>
+                    <input type="text" id="log-search" class="form-control" placeholder="Введите текст для поиска">
+                </div>
+            </section>
+            
+            <section class="logs-container">
+                <div class="logs-table-container">
+                    <table class="logs-table">
+                        <thead>
+                            <tr>
+                                <th>Время</th>
+                                <th>Уровень</th>
+                                <th>Сообщение</th>
+                            </tr>
+                        </thead>
+                        <tbody id="logs-table-body">
+                            <tr>
+                                <td colspan="3" class="text-center">Загрузка журнала...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+        
+        <footer class="app-footer">
+            <p>&copy; 2025 ComeBack Device Clear. Все права защищены.</p>
+        </footer>
+    </div>
+    
+    <div id="confirm-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Подтверждение</h3>
+                <span class="modal-close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <p>Вы уверены, что хотите очистить журнал событий?</p>
+            </div>
+            <div class="modal-footer">
+                <button id="confirm-cancel-btn" class="btn btn-secondary">Отмена</button>
+                <button id="confirm-ok-btn" class="btn btn-danger">Подтвердить</button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="js/auth.js"></script>
+    <script src="js/logs.js"></script>
+</body>
+</html>

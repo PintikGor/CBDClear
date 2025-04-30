@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Расписание - ComeBack Device Clear</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="img/favicon.ico">
+</head>
+<body>
+    <div class="app-container">
+        <header class="app-header">
+            <div class="header-logo">
+                <img src="img/logo.png" alt="ComeBack Device Clear">
+                <h1>ComeBack Device Clear</h1>
+            </div>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="dashboard.html">Панель управления</a></li>
+                    <li class="active"><a href="schedule.html">Расписание</a></li>
+                    <li><a href="settings.html">Настройки</a></li>
+                    <li><a href="logs.html">Журнал</a></li>
+                </ul>
+            </nav>
+            <div class="user-menu">
+                <span id="username-display"></span>
+                <button id="logout-btn" class="btn btn-sm">Выход</button>
+            </div>
+        </header>
+        
+        <main class="app-content">
+            <section class="content-header">
+                <h2>Расписание работы</h2>
+                <div class="content-actions">
+                    <button id="add-schedule-btn" class="btn btn-primary">Добавить расписание</button>
+                    <button id="save-schedules-btn" class="btn btn-success">Сохранить изменения</button>
+                </div>
+            </section>
+            
+            <section class="schedule-list">
+                <div class="schedule-table-container">
+                    <table class="schedule-table">
+                        <thead>
+                            <tr>
+                                <th>Статус</th>
+                                <th>Нагрузка</th>
+                                <th>Режим</th>
+                                <th>Дни</th>
+                                <th>Время включения</th>
+                                <th>Длительность / Время выключения</th>
+                                <th>Действия</th>
+                            </tr>
+                        </thead>
+                        <tbody id="schedule-list-body">
+                            <!-- Здесь будут добавлены строки расписания через JavaScript -->
+                            <tr>
+                                <td colspan="7" class="text-center">Загрузка расписаний...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+            
+            <div id="schedule-modal" class="modal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 id="schedule-modal-title">Добавить расписание</h3>
+                        <span class="modal-close">&times;</span>
+                    </div>
+                    <div class="modal-body">
+                        <form id="schedule-form">
+                            <input type="hidden" id="schedule-id" value="-1">
+                            
+                            <div class="form-group">
+                                <label for="schedule-enabled">Статус</label>
+                                <div class="toggle-switch">
+                                    <input type="checkbox" id="schedule-enabled" checked>
+                                    <label for="schedule-enabled"></label>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="schedule-load">Нагрузка</label>
+                                <select id="schedule-load" class="form-control">
+                                    <option value="1">Нагрузка 1 (Насос)</option>
+                                    <option value="2">Нагрузка 2 (Дворник)</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="schedule-mode">Режим</label>
+                                <select id="schedule-mode" class="form-control">
+                                    <option value="0">Ежедневно</option>
+                                    <option value="1">По дням недели</option>
+                                    <option value="2">Ежемесячно</option>
+                                </select>
+                            </div>
+                            
+                            <div id="schedule-days-weekly" class="form-group schedule-days">
+                                <label>Дни недели</label>
+                                <div class="days-checkboxes">
+                                    <div class="day-checkbox">
+                                        <input type="checkbox" id="day-mon" value="1" checked>
+                                        <label for="day-mon">Пн</label>
+                                    </div>
+                                    <div class="day-checkbox">
+                                        <input type="checkbox" id="day-tue" value="2" checked>
+                                        <label for="day-tue">Вт</label>
+                                    </div>
+                                    <div class="day-checkbox">
+                                        <input type="checkbox" id="day-wed" value="3" checked>
+                                        <label for="day-wed">Ср</label>
+                                    </div>
+                                    <div class="day-checkbox">
+                                        <input type="checkbox" id="day-thu" value="4" checked>
+                                        <label for="day-thu">Чт</label>
+                                    </div>
+                                    <div class="day-checkbox">
+                                        <input type="checkbox" id="day-fri" value="5" checked>
+                                        <label for="day-fri">Пт</label>
+                                    </div>
+                                    <div class="day-checkbox">
+                                        <input type="checkbox" id="day-sat" value="6" checked>
+                                        <label for="day-sat">Сб</label>
+                                    </div>
+                                    <div class="day-checkbox">
+                                        <input type="checkbox" id="day-sun" value="0" checked>
+                                        <label for="day-sun">Вс</label>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div id="schedule-days-monthly" class="form-group schedule-days">
+                                <label for="schedule-day">День месяца</label>
+                                <input type="number" id="schedule-day" class="form-control" min="1" max="31" value="1">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="schedule-time">Время включения</label>
+                                <div class="time-inputs">
+                                    <input type="number" id="schedule-hour" class="form-control time-input" min="0" max="23" value="12">
+                                    <span class="time-separator">:</span>
+                                    <input type="number" id="schedule-minute" class="form-control time-input" min="0" max="59" value="0">
+                                    <span class="time-separator">:</span>
+                                    <input type="number" id="schedule-second" class="form-control time-input" min="0" max="59" value="0">
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="schedule-use-duration">Использовать длительность</label>
+                                <div class="toggle-switch">
+                                    <input type="checkbox" id="schedule-use-duration" checked>
+                                    <label for="schedule-use-duration"></label>
+                                </div>
+                            </div>
+                            
+                            <div id="schedule-duration" class="form-group">
+                                <label for="schedule-duration-time">Длительность</label>
+                                <div class="time-inputs">
+                                    <input type="number" id="schedule-duration-hour" class="form-control time-input" min="0" max="23" value="0">
+                                    <span class="time-separator">:</span>
+                                    <input type="number" id="schedule-duration-minute" class="form-control time-input" min="0" max="59" value="5">
+                                    <span class="time-separator">:</span>
+                                    <input type="number" id="schedule-duration-second" class="form-control time-input" min="0" max="59" value="0">
+                                </div>
+                            </div>
+                            
+                            <div id="schedule-end-time" class="form-group">
+                                <label for="schedule-end-time">Время выключения</label>
+                                <div class="time-inputs">
+                                    <input type="number" id="schedule-end-hour" class="form-control time-input" min="0" max="23" value="12">
+                                    <span class="time-separator">:</span>
+                                    <input type="number" id="schedule-end-minute" class="form-control time-input" min="0" max="59" value="5">
+                                    <span class="time-separator">:</span>
+                                    <input type="number" id="schedule-end-second" class="form-control time-input" min="0" max="59" value="0">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button id="schedule-cancel-btn" class="btn btn-secondary">Отмена</button>
+                        <button id="schedule-save-btn" class="btn btn-primary">Сохранить</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+        
+        <footer class="app-footer">
+            <p>&copy; 2025 ComeBack Device Clear. Все права защищены.</p>
+        </footer>
+    </div>
+    
+    <script src="js/auth.js"></script>
+    <script src="js/schedule.js"></script>
+</body>
+</html>
