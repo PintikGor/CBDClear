@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ComeBack Device Clear</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/login.css">
+    <link rel="icon" href="img/favicon.ico">
+</head>
+<body class="login-page">
+    <div class="login-container">
+        <div class="login-header">
+            <img src="img/logo.png" alt="ComeBack Device Clear" class="login-logo">
+            <h1>ComeBack Device Clear</h1>
+            <p>Система очистки камер видеонаблюдения</p>
+        </div>
+        
+        <div class="login-form">
+            <h2>Авторизация</h2>
+            <div class="form-group">
+                <label for="username">Имя пользователя</label>
+                <input type="text" id="username" name="username" placeholder="Введите имя пользователя">
+            </div>
+            <div class="form-group">
+                <label for="password">Пароль</label>
+                <input type="password" id="password" name="password" placeholder="Введите пароль">
+            </div>
+            <div class="form-group">
+                <button id="login-btn" class="btn btn-primary">Войти</button>
+            </div>
+            <div id="login-error" class="error-message"></div>
+        </div>
+        
+        <div class="login-footer">
+            <p>&copy; 2025 ComeBack Device Clear. Все права защищены.</p>
+        </div>
+    </div>
+    
+    <script src="js/auth.js"></script>
+</body>
+</html>
